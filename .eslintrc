@@ -1,0 +1,59 @@
+env:
+  node: true
+
+globals: 
+  canvas: true
+
+extends:
+  - plugin:import/errors
+  - plugin:import/warnings
+  - plugin:react/recommended
+  - "@elastic/kibana"
+  - prettier
+
+plugins:
+  - prettier
+  - react
+
+settings:
+  import/resolver:
+    - "@kbn/eslint-import-resolver-kibana"
+  react:
+    version: "16.0"
+
+rules:
+  # preferences
+  comma-dangle: [2, always-multiline]
+  no-multiple-empty-lines: [2, {max: 1, maxEOF: 1}]
+  no-multi-spaces: 2
+  radix: 2
+
+  # module importing
+  import/order: [2, {"groups": ["builtin", "external", "internal", "parent", "sibling", "index"]}]
+  import/extensions: [2, "never", {"json": "always", "less": "always", "svg": "always" }]
+
+  # Prettier
+  prettier/prettier: 2
+
+  # React
+  jsx-quotes: 2
+  react/no-did-mount-set-state: 2
+  react/no-did-update-set-state: 2
+  react/no-multi-comp: [2, {ignoreStateless: true}]
+  react/self-closing-comp: 2
+  react/sort-comp: 2
+  react/jsx-boolean-value: 2
+  react/jsx-wrap-multilines: 2
+  react/no-unescaped-entities: [2, {forbid: [">", "}"]}]
+  react/forbid-elements: [2, {forbid:
+    [{
+      element: "EuiConfirmModal",
+      message: "Use <ConfirmModal> instead"
+    }, {
+      element: "EuiPopover",
+      message: "Use <Popover> instead"
+    }, {
+      element: "EuiIconTip",
+      message: "Use <TooltipIcon> instead"
+    }]
+  }]
