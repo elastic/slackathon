@@ -17,9 +17,9 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "@elastic/eslint-config-kibana": "link:./kibana/packages/eslint-config-kibana",
+    "@elastic/eslint-config-kibana": "link:../kibana/packages/eslint-config-kibana",
     "@kbn/eslint-import-resolver-kibana":
-      "link:./kibana/packages/kbn-eslint-import-resolver-kibana",
+      "link:../kibana/packages/kbn-eslint-import-resolver-kibana",
     "babel-core": "^6.24.1",
     "babel-eslint": "^8.0.0",
     "babel-plugin-mock-imports": "^0.0.5",
