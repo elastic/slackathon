@@ -3,12 +3,13 @@ import commands from './index';
 
 export default () => ({
   help: 'Get a list of commands, or help for a command',
-  example: 'whomadeyou',
+  example: 'who',
   fn: args => {
     const commandName = args.trim();
     const command = commands[commandName];
     if (!command)
       return `My commands are: ${Object.keys(commands)
+        .map(command => `*${command}*`)
         .sort()
         .join(
           ', '
