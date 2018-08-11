@@ -5,11 +5,16 @@ export default () => ({
   help: 'Run a canvas expression and get an image back',
   example: 'demodata | render',
   fn: args => {
+    console.log('BEFORE', args);
+
+    args = args.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+
+    console.log('AFTER', args);
     //(browserTimezone:America%2FPhoenix,layout:(dimensions:(height:720,width:1080),id:preserve_layout),objectType:'canvas%20workpad',relativeUrls:!(${reportURL}),title:'STUFF')
 
     // http://localhost:5601/api/reporting/generate/printablePdf?jobParams=(browserTimezone:America/Phoenix,layout:(dimensions:(height:720,width:1080),id:preserve_layout),objectType:'canvas workpad',relativeUrls:!('http://localhost:5601/dtw/app/canvas#/execute/expression?exp=demodata | render'))
 
-    const reportURL = `/app/canvas#/execute/expression?exp=${args.trim()}`;
+    const reportURL = `/app/canvas#/execute/expression?exp=${encodeURIComponent(args.trim())}`;
 
     const config = {
       browserTimezone: 'America/Phoenix',
