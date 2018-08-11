@@ -39,9 +39,6 @@ inputBot.getUser(name).then(me => {
 
     try {
       run(input).then(output => {
-        // If this is anything but an object, make it into an object with a message property
-        if (typeof output !== 'object') output = { message: output };
-
         // We know it's an object. Is it uploading a file? If so, use a slack api that supports that
         if (output.file != null) {
           return uploadToSlack({

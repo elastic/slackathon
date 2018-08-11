@@ -20,5 +20,8 @@ export default str => {
     );
   }
 
-  return Promise.resolve(command().fn(commandArgument));
+  return Promise.resolve(command().fn(commandArgument)).then(message => {
+    if (typeof message !== 'object') return { message };
+    return message;
+  });
 };
