@@ -1,6 +1,4 @@
-import { random } from 'lodash';
 import fetch from 'axios';
-import streamBuffers from 'stream-buffers';
 
 export default () => ({
   help: 'Get a picture of a kitten with some dimensions',
