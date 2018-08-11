@@ -11,6 +11,7 @@ inputBot.getUser(name).then(me => {
   const { id } = me;
 
   inputBot.on('message', function(data) {
+    console.log(data);
     // all ingoing events https://api.slack.com/rtm
     const { text, channel, user } = data;
     if (!text) return;
@@ -32,32 +33,34 @@ inputBot.getUser(name).then(me => {
       );
     }, 5000);
 
+    const done = () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
+
     run(input).then(output => {
-      if (typeof output !== 'object') return inputBot.postMessage(channel, output, {});
+      // If this is anything but an object, make it into an object with a message property
+      if (typeof output !== 'object') output = { message: output };
 
+      // We know it's an object. Is it uploading a file? If so, use a slack api that supports that
       if (output.file != null) {
-        const timeout1 = setTimeout(() => {
-          inputBot.postEphemeral(channel, user, 'Ok, working on it. Give me a few moments here');
-        }, 1000);
-
-        const timeout2 = setTimeout(() => {
-          inputBot.postEphemeral(
-            channel,
-            user,
-            'This is taking awhile, sorry about that. Workin real hard over here. Sometimes images take awhile'
-          );
-        }, 5000);
-
         return uploadToSlack({
           ...output,
           channels: channel,
-        }).then(() => {
-          clearTimeout(timeout1);
-          clearTimeout(timeout2);
-        });
+        }).then(done);
       }
 
+      // No file? Then you probably want your function to return an object in this shape if you're sending
+      // anything but a simple shape:
+      /*
+        {
+          message: 'some string here',
+          params: {... valid slack API params object. Good for attachments that aren't images. Eg, code}
+        }
+      */
+
       inputBot.postMessage(channel, output.message, output.params);
+      done();
     });
   });
 });
