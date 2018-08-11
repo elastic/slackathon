@@ -1,6 +1,6 @@
 import Slackbot from 'slackbots';
 import run from './run';
-import { uploadToSlack } from './upload_to_slack';
+import { uploadToSlack } from './lib/upload_to_slack';
 import config from './config.json';
 
 const { name } = config;
@@ -38,7 +38,7 @@ inputBot.getUser(name).then(me => {
     };
 
     try {
-      run(input).then(output => {
+      run(input, data).then(output => {
         // We know it's an object. Is it uploading a file? If so, use a slack api that supports that
         if (output.file != null) {
           return uploadToSlack({

@@ -15,10 +15,11 @@ export default () => ({
       responseType: 'stream',
     }).then(resp => {
       return {
-        title: 'Here is your adorable kitten',
+        title: 'Kitten',
         file: resp.data,
         filename: 'kitten.jpg',
         type: 'jpg',
+        initial_comment: 'Awwww, look at this kitten',
       };
     });
   },

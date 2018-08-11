@@ -50,10 +50,11 @@ export default () => ({
               fetch(fullPath, { responseType: 'stream' })
                 .then(resp => {
                   resolve({
-                    title: 'Here is your adorable canvas element',
+                    title: 'Canvas Element',
                     file: resp.data,
                     filename: 'canvas.png',
                     type: 'png',
+                    initial_comment: `Output of \`${args.trim()}\``,
                   });
                 })
                 .catch(() => {
