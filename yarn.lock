@@ -1635,8 +1635,8 @@ eslint-plugin-import@^2.6.0:
     resolve "^1.6.0"
 
 eslint-plugin-jest@^21.0.0:
-  version "21.20.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.20.2.tgz#136dfe946e9a015e643f074ade2fdb9932e8bab3"
+  version "21.21.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.21.0.tgz#f0afd138c4acb5f0cd7698318fb49c7d49f3bf45"
 
 eslint-plugin-mocha@^4.9.0:
   version "4.12.1"
@@ -3575,13 +3575,9 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rison-node@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/rison-node/-/rison-node-2.0.0.tgz#a637ec8caca337458b37a5b03d413b07840231db"
-
-rison@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/rison/-/rison-0.1.1.tgz#4dcc0557b241aff60e76178e7792135713f33120"
+rison-node@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/rison-node/-/rison-node-1.0.2.tgz#b7b5f37f39f5ae2a51a973a33c9aa17239a33e4b"
 
 run-async@^0.1.0:
   version "0.1.0"

@@ -1,0 +1,11 @@
+{
+  "refreshInterval": {
+    "pause": true,
+    "value": 0
+  },
+  "time": {
+    "from": "now-1h",
+    "mode": "quick",
+    "to": "now"
+  }
+}

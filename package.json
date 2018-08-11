@@ -17,11 +17,11 @@
     "elasticsearch": "^15.1.1",
     "lodash": "^3.10.1",
     "numeral": "^2.0.6",
-    "rison": "^0.1.1",
-    "rison-node": "^2.0.0",
+    "rison-node": "^1.0.0",
     "slack": "^11.0.1",
     "slackbots": "^1.1.0",
-    "stream-buffers": "^3.0.2"
+    "stream-buffers": "^3.0.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@elastic/eslint-config-kibana": "link:../kibana/packages/eslint-config-kibana",

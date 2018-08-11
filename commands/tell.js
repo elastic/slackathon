@@ -15,7 +15,9 @@ export default () => ({
       if (output.file) {
         return {
           ...output,
-          initial_comment: `${recepient}, <@${message.user}> wanted you to know: ${output.initial_comment}`,
+          initial_comment: `${recepient}, <@${message.user}> wanted you to know: ${
+            output.initial_comment
+          }`,
         };
       }
       return {
