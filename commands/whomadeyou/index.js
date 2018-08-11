@@ -6,10 +6,11 @@ export default () => ({
   example: '',
   fn: () => {
     return {
-      title: 'These idiots.',
+      title: 'Idiots.',
       file: createReadStream(resolve(__dirname, 'idiots.jpg')),
       filename: 'idiots.jpg',
       type: 'jpg',
+      initial_comment: 'These idiots stayed up half the night pounding keyboards, and beer.',
     };
   },
 });

@@ -1,6 +1,6 @@
 import help from './help';
 import random from './random';
 import kitten from './kitten';
-import whowroteyou from './whowroteyou';
+import whomadeyou from './whomadeyou';
 
-export default { random, kitten, whowroteyou, help };
+export default { random, kitten, whomadeyou, help };

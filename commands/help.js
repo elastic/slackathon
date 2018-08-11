@@ -2,7 +2,7 @@ import commands from './index';
 
 export default () => ({
   help: 'Get a list of commands, or help for a command',
-  example: '',
+  example: 'whomadeyou',
   fn: args => {
     const commandName = args.trim();
     const command = commands[commandName];
