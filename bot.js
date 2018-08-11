@@ -11,7 +11,6 @@ inputBot.getUser(name).then(me => {
   const { id } = me;
 
   inputBot.on('message', function(data) {
-    console.log(data);
     // all ingoing events https://api.slack.com/rtm
     const { text, channel, user } = data;
     if (!text) return;
@@ -38,30 +37,35 @@ inputBot.getUser(name).then(me => {
       clearTimeout(timeout2);
     };
 
-    run(input).then(output => {
-      // If this is anything but an object, make it into an object with a message property
-      if (typeof output !== 'object') output = { message: output };
+    try {
+      run(input).then(output => {
+        // If this is anything but an object, make it into an object with a message property
+        if (typeof output !== 'object') output = { message: output };
 
-      // We know it's an object. Is it uploading a file? If so, use a slack api that supports that
-      if (output.file != null) {
-        return uploadToSlack({
-          ...output,
-          channels: channel,
-        }).then(done);
-      }
-
-      // No file? Then you probably want your function to return an object in this shape if you're sending
-      // anything but a simple shape:
-      /*
-        {
-          message: 'some string here',
-          params: {... valid slack API params object. Good for attachments that aren't images. Eg, code}
+        // We know it's an object. Is it uploading a file? If so, use a slack api that supports that
+        if (output.file != null) {
+          return uploadToSlack({
+            ...output,
+            channels: channel,
+          }).then(done);
         }
-      */
 
-      inputBot.postMessage(channel, output.message, output.params);
+        // No file? Then you probably want your function to return an object in this shape if you're sending
+        // anything but a simple shape:
+        /*
+          {
+            message: 'some string here',
+            params: {... valid slack API params object. Good for attachments that aren't images. Eg, code}
+          }
+        */
+
+        inputBot.postMessage(channel, output.message, output.params);
+        done();
+      });
+    } catch (e) {
+      inputBot.postMessage(channel, e.message);
       done();
-    });
+    }
   });
 });
 

@@ -1,3 +1,4 @@
+import { name } from '../config.json';
 import commands from './index';
 
 export default () => ({
@@ -6,8 +7,15 @@ export default () => ({
   fn: args => {
     const commandName = args.trim();
     const command = commands[commandName];
-    if (!command) return `My commands are: ${Object.keys(commands).join(', ')}`;
+    if (!command)
+      return `My commands are: ${Object.keys(commands)
+        .sort()
+        .join(
+          ', '
+        )}. For more information on a function, try something like: \`@${name} help random\``;
 
-    return `${commandName}: ${command().help}. For example: "${commandName} ${command().example}"`;
+    return `${commandName}: ${command().help}. For example: \`@${name} ${commandName} ${
+      command().example
+    }\``;
   },
 });
