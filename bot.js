@@ -22,7 +22,7 @@ inputBot.getUser(name).then(me => {
 
     const timeout1 = setTimeout(() => {
       inputBot.postEphemeral(channel, user, 'Ok, working on it. Give me a few moments here');
-    }, 1000);
+    }, 2000);
 
     const timeout2 = setTimeout(() => {
       inputBot.postEphemeral(
@@ -30,7 +30,7 @@ inputBot.getUser(name).then(me => {
         user,
         'This is taking awhile, sorry about that. Workin real hard over here. Sometimes images take awhile'
       );
-    }, 5000);
+    }, 8000);
 
     const done = () => {
       clearTimeout(timeout1);
@@ -56,12 +56,12 @@ inputBot.getUser(name).then(me => {
           }
         */
 
-        inputBot.postMessage(channel, output.message, output.params);
         done();
+        inputBot.postMessage(channel, output.message, output.params);
       });
     } catch (e) {
-      inputBot.postMessage(channel, e.message);
       done();
+      inputBot.postMessage(channel, e.message);
     }
   });
 });
