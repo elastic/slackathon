@@ -9,6 +9,7 @@ export default () => ({
     const command = commands[commandName];
     if (!command)
       return `My commands are: ${Object.keys(commands)
+        .map(command => `*${command}*`)
         .sort()
         .join(
           ', '
