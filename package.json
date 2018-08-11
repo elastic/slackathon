@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "elasticsearch": "^15.1.1",
     "lodash": "^3.10.1",
+    "nodemon": "^1.18.3",
+    "numeral": "^2.0.6",
     "slack": "^11.0.1",
     "slackbots": "^1.1.0",
     "stream-buffers": "^3.0.2"

@@ -23,25 +23,29 @@ inputBot.getUser(name).then(me => {
     run(input).then(output => {
       if (typeof output !== 'object') return inputBot.postMessage(channel, output, {});
 
-      const timeout1 = setTimeout(() => {
-        inputBot.postEphemeral(channel, user, 'Ok, working on it. Give me a few moments here');
-      }, 1000);
+      if (output.file != null) {
+        const timeout1 = setTimeout(() => {
+          inputBot.postEphemeral(channel, user, 'Ok, working on it. Give me a few moments here');
+        }, 1000);
 
-      const timeout2 = setTimeout(() => {
-        inputBot.postEphemeral(
-          channel,
-          user,
-          'This is taking awhile, sorry about that. Workin real hard over here. Sometimes images take awhile'
-        );
-      }, 5000);
+        const timeout2 = setTimeout(() => {
+          inputBot.postEphemeral(
+            channel,
+            user,
+            'This is taking awhile, sorry about that. Workin real hard over here. Sometimes images take awhile'
+          );
+        }, 5000);
 
-      return uploadToSlack({
-        ...output,
-        channels: channel,
-      }).then(() => {
-        clearTimeout(timeout1);
-        clearTimeout(timeout2);
-      });
+        return uploadToSlack({
+          ...output,
+          channels: channel,
+        }).then(() => {
+          clearTimeout(timeout1);
+          clearTimeout(timeout2);
+        });
+      }
+
+      inputBot.postMessage(channel, output.message, output.params);
     });
   });
 });
