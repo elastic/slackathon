@@ -12,7 +12,7 @@ export default () => ({
       throw new Error('upper and lower bounds are required');
 
     return new Promise(resolve => {
-      resolve(random(upper, lower));
+      resolve(random(lower, upper));
     });
   },
 });

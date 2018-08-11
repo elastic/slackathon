@@ -6,20 +6,22 @@
   "kibana": {
     "version": "kibana"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
     "trailingComma": "es5"
   },
   "dependencies": {
-    "lodash": "^3.10.1"
+    "axios": "^0.18.0",
+    "lodash": "^3.10.1",
+    "slack": "^11.0.1",
+    "slackbots": "^1.1.0",
+    "stream-buffers": "^3.0.2"
   },
   "devDependencies": {
     "@elastic/eslint-config-kibana": "link:../kibana/packages/eslint-config-kibana",
-    "@kbn/eslint-import-resolver-kibana":
-      "link:../kibana/packages/kbn-eslint-import-resolver-kibana",
+    "@kbn/eslint-import-resolver-kibana": "link:../kibana/packages/kbn-eslint-import-resolver-kibana",
     "babel-core": "^6.24.1",
     "babel-eslint": "^8.0.0",
     "babel-plugin-mock-imports": "^0.0.5",
