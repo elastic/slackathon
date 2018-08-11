@@ -15,6 +15,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^3.10.1",
+    "rison": "^0.1.1",
+    "rison-node": "^2.0.0",
     "slack": "^11.0.1",
     "slackbots": "^1.1.0",
     "stream-buffers": "^3.0.2"

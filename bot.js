@@ -20,20 +20,20 @@ inputBot.getUser(name).then(me => {
 
     const input = text.split(match)[1].trim();
 
+    const timeout1 = setTimeout(() => {
+      inputBot.postEphemeral(channel, user, 'Ok, working on it. Give me a few moments here');
+    }, 1000);
+
+    const timeout2 = setTimeout(() => {
+      inputBot.postEphemeral(
+        channel,
+        user,
+        'This is taking awhile, sorry about that. Workin real hard over here. Sometimes images take awhile'
+      );
+    }, 5000);
+
     run(input).then(output => {
       if (typeof output !== 'object') return inputBot.postMessage(channel, output, {});
-
-      const timeout1 = setTimeout(() => {
-        inputBot.postEphemeral(channel, user, 'Ok, working on it. Give me a few moments here');
-      }, 1000);
-
-      const timeout2 = setTimeout(() => {
-        inputBot.postEphemeral(
-          channel,
-          user,
-          'This is taking awhile, sorry about that. Workin real hard over here. Sometimes images take awhile'
-        );
-      }, 5000);
 
       return uploadToSlack({
         ...output,
