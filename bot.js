@@ -7,11 +7,20 @@ const { name } = config;
 // create a bot
 const inputBot = new Slackbot(config);
 
+inputBot.on('open', () => {
+  console.log(`${name} reporting for duty`);
+});
+
+inputBot.on('close', () => {
+  console.log(`${name} disconected :(`);
+});
+
 inputBot.getUser(name).then(me => {
   const { id } = me;
 
   inputBot.on('message', function(data) {
     // all ingoing events https://api.slack.com/rtm
+    // console.log('message', data);
     const { text, channel, user } = data;
     if (!text) return;
 
