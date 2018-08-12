@@ -6,7 +6,10 @@
   "kibana": {
     "version": "kibana"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
@@ -46,6 +49,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-react": "^7.1.0",
     "expect.js": "^0.3.1",
+    "nodemon": "^1.18.3",
     "prettier": "^1.9.2"
   }
 }
