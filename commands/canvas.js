@@ -5,7 +5,6 @@ export default () => ({
   help: 'Run a canvas expression and get an image back',
   example: 'demodata | render',
   fn: args => {
-
     args = args.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
     const reportURL = `/app/canvas#/execute/expression?exp=${encodeURIComponent(args.trim())}`;
