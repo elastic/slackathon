@@ -1,7 +1,8 @@
 import Slackbot from 'slackbots';
 import run from './run';
-import { uploadToSlack } from './lib/upload_to_slack';
 import config from './config.json';
+import types from './types';
+import normalizeOutput from './lib/normalize_output';
 
 const { name } = config;
 // create a bot
@@ -18,14 +19,17 @@ inputBot.on('close', () => {
 inputBot.getUser(name).then(me => {
   const { id } = me;
 
-  inputBot.on('message', function(data) {
+  inputBot.on('message', function(message) {
     // all ingoing events https://api.slack.com/rtm
-    // console.log('message', data);
-    const { text, channel, user } = data;
+    const { text, user, channel } = message;
     if (!text) return;
 
     const match = new RegExp(`^<@${id}>`);
     if (!text.match(match)) return;
+
+    const handlers = {
+      getChannel: () => channel,
+    };
 
     const input = text.split(match)[1].trim();
 
@@ -47,28 +51,16 @@ inputBot.getUser(name).then(me => {
     };
 
     try {
-      run(input, data).then(output => {
-        // We know it's an object. Is it uploading a file? If so, use a slack api that supports that
-        if (output.file != null) {
-          return uploadToSlack({
-            ...output,
-            channels: channel,
-          }).then(done);
-        }
+      run(input, message, handlers)
+        .then(normalizeOutput)
+        .then(output => {
+          const type = types[output.type];
+          if (!type) throw new Error(`Unknown type returned from command: ${output.type}`);
 
-        // No file? Then you probably want your function to return an object in this shape if you're sending
-        // anything but a simple shape:
-        /*
-          {
-            message: 'some string here',
-            params: {... valid slack API params object. Good for attachments that aren't images. Eg, code}
-          }
-        */
-
-        done();
-        inputBot.postMessage(channel, output.message, output.params);
-      });
+          return Promise.resolve(type.fn(output.value, message, handlers)).then(done);
+        });
     } catch (e) {
+      // Command failed. Real smooth bud.
       done();
       inputBot.postMessage(channel, e.message);
     }
