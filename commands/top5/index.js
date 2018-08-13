@@ -1,9 +1,8 @@
-import { Client } from 'elasticsearch';
 import numeral from 'numeral';
 import { last } from 'lodash';
-import { es } from '../../config.json';
+import client from '../../lib/es_client';
 import { createTSVBChartLink } from './createTSVBChartLink';
-const client = new Client(es);
+
 const notFoundMessage = {
   message: "*Oh jeez, you're not gonna like this...* I couldn't find any results.",
 };
