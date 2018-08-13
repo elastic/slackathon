@@ -13,14 +13,21 @@ export default () => ({
     return fetch(`http://placekitten.com/${x}/${y}`, {
       method: 'GET',
       responseType: 'stream',
-    }).then(resp => {
-      return {
-        title: 'Kitten',
-        file: resp.data,
-        filename: 'kitten.jpg',
-        type: 'jpg',
-        initial_comment: 'Awwww, look at this kitten',
-      };
-    });
+    })
+      .then(resp => {
+        return {
+          type: 'file',
+          value: {
+            title: 'Kitten',
+            file: resp.data,
+            filename: 'kitten.jpg',
+            type: 'jpg',
+            initial_comment: 'Awwww, look at this kitten',
+          },
+        };
+      })
+      .catch(() => {
+        return 'Aw, no adorable kittens found in those dimensions. Try some nice round numbers k?';
+      });
   },
 });

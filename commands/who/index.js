@@ -22,11 +22,14 @@ export default () => ({
       return "I don't know the answer to that. You can ask me `who are you` and `who made you`";
 
     return {
-      title: '',
-      file: createReadStream(resolve(__dirname, q.file)),
-      filename: q.file,
-      type: 'jpg',
-      initial_comment: q.message,
+      type: 'file',
+      value: {
+        title: '',
+        file: createReadStream(resolve(__dirname, q.file)),
+        filename: q.file,
+        type: 'jpg',
+        initial_comment: q.message,
+      },
     };
   },
 });

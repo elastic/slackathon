@@ -84,36 +84,42 @@ export default () => ({
         return notFoundMessage;
       }
       return {
-        message: 'Here you go...',
-        params: {
-          attachments: [
-            ...attachments,
-            {
-              fallback: `View chart at: ${tsvbLink} `,
-              actions: [
-                {
-                  type: 'button',
-                  text: 'View Chart in Kibana',
-                  url: tsvbLink,
-                  style: 'primary',
-                },
-              ],
-            },
-          ],
+        type: 'message',
+        value: {
+          message: 'Here you go...',
+          params: {
+            attachments: [
+              ...attachments,
+              {
+                fallback: `View chart at: ${tsvbLink} `,
+                actions: [
+                  {
+                    type: 'button',
+                    text: 'View Chart in Kibana',
+                    url: tsvbLink,
+                    style: 'primary',
+                  },
+                ],
+              },
+            ],
+          },
         },
       };
     } catch (e) {
       return {
-        message: 'Oopsie! Looks like you stubbed your toe',
-        params: {
-          attachments: [
-            {
-              fallback: e.message,
-              color: '#A30000',
-              title: e.message,
-              text: e.stack,
-            },
-          ],
+        type: 'message',
+        value: {
+          message: 'Oopsie! Looks like you stubbed your toe',
+          params: {
+            attachments: [
+              {
+                fallback: e.message,
+                color: '#A30000',
+                title: e.message,
+                text: e.stack,
+              },
+            ],
+          },
         },
       };
     }

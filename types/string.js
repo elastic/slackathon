@@ -1,10 +1,5 @@
-import Slackbot from 'slackbots';
-import config from '../config.json';
+import postMessageToSlack from '../lib/post_message_to_slack';
 
-const slackbot = new Slackbot(config);
-
-export default () => {
-  fn: (output, message, handlers) => {
-    return slackbot.postMessage(handlers.getChannel(message), output, output);
-  };
-};
+export default () => ({
+  fn: (output, message, handlers) => postMessageToSlack(handlers.getTo(), output),
+});

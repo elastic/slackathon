@@ -1,7 +1,8 @@
 import commands from './commands';
 import { name } from './config.json';
+import normalizeOutput from './lib/normalize_output';
 
-export default (str, data) => {
+export default (str, data, handlers) => {
   const parts = str.trim().split(' '); // Split by space
   const commandName = parts.shift();
   const commandArgument = parts.join(' ').trim();
@@ -20,8 +21,5 @@ export default (str, data) => {
     );
   }
 
-  return Promise.resolve(command().fn(commandArgument, data)).then(message => {
-    if (typeof message !== 'object') return { message };
-    return message;
-  });
+  return Promise.resolve(command().fn(commandArgument, data, handlers)).then(normalizeOutput);
 };

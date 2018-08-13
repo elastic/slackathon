@@ -2,7 +2,7 @@ import Slackbot from 'slackbots';
 import run from './run';
 import config from './config.json';
 import types from './types';
-import normalizeOutput from './lib/normalize_output';
+import postMessageToSlack from './lib/post_message_to_slack';
 
 const { name } = config;
 // create a bot
@@ -28,7 +28,7 @@ inputBot.getUser(name).then(me => {
     if (!text.match(match)) return;
 
     const handlers = {
-      getChannel: () => channel,
+      getTo: () => channel,
     };
 
     const input = text.split(match)[1].trim();
@@ -51,18 +51,16 @@ inputBot.getUser(name).then(me => {
     };
 
     try {
-      run(input, message, handlers)
-        .then(normalizeOutput)
-        .then(output => {
-          const type = types[output.type];
-          if (!type) throw new Error(`Unknown type returned from command: ${output.type}`);
+      run(input, message, handlers).then(output => {
+        const type = types[output.type];
+        if (!type) throw new Error(`Unknown type returned from command: ${output.type}`);
 
-          return Promise.resolve(type.fn(output.value, message, handlers)).then(done);
-        });
+        return Promise.resolve(type().fn(output.value, message, handlers)).then(done);
+      });
     } catch (e) {
       // Command failed. Real smooth bud.
       done();
-      inputBot.postMessage(channel, e.message);
+      postMessageToSlack(channel, e.message);
     }
   });
 });

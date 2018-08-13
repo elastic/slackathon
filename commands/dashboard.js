@@ -46,21 +46,26 @@ export default () => ({
               fetch(fullPath, { responseType: 'stream' })
                 .then(resp => {
                   resolve({
-                    title: 'Kibana Dashboard',
-                    file: resp.data,
-                    filename: 'dashboard.png',
-                    type: 'png',
-                    initial_comment: `Output of \`${args.trim()}\``,
+                    type: 'file',
+                    value: {
+                      title: 'Kibana Dashboard',
+                      file: resp.data,
+                      filename: 'dashboard.png',
+                      type: 'png',
+                      initial_comment: `Output of \`${args.trim()}\``,
+                    },
                   });
                 })
                 .catch(() => {
-                  if (!timeout)
-                    throw new Error(
-                      'Expression timed out. Well, probably totally failed, but who knows. Sorry. Write better code next time dingus.'
+                  if (!timeout) {
+                    resolve(
+                      "Dashboard timed out. I wish I could tell you more. I just...I just don't know what happened."
                     );
+                    return;
+                  }
                   poll();
                 });
-            }, 1000);
+            }, 2000);
           }
 
           poll();
