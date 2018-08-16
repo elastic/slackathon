@@ -51,7 +51,10 @@ export default () => ({
                       file: resp.data,
                       filename: 'canvas.png',
                       type: 'png',
-                      initial_comment: `Output of \`${args.trim()}\``,
+                      initial_comment: `Output of:           
+\`\`\`
+${args.trim()}
+\`\`\``,
                     },
                   });
                 })
