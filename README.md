@@ -45,7 +45,7 @@ If you want todo more than string replies (you do), then you probably want to re
 Once you've created your function, import it to `index.js` and add it to the object that is exported. Whatever you export it as becomes the command name.
 
 ### But I want to use an entirely different API
-Now we're talking! Slackoff can do that. See the `types/` directory. Each of these maps to an object type that is returned from a command. See `file.js`. That maps up to the `{type: 'file'}` that is returned from `kitten.js`.
+Now we're talking! Slackathon can do that. See the `types/` directory. Each of these maps to an object type that is returned from a command. See `file.js`. That maps up to the `{type: 'file'}` that is returned from `kitten.js`.
 
 As you can see, `file.js` is the bit that actually does the uploading to slack. 
 
