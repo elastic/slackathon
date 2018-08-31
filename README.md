@@ -53,5 +53,5 @@ As you can see, `file.js` is the bit that actually does the uploading to slack.
 That should be everything you need to hack on this. 
 
 ### The future
-- [] Allow the bot to connect to networks aside from slack. This should be pretty simple, you just need another layer and a bit more config. Commands wouldn't change, but you'd need a `type` handler for each kind of network
-- [] Your totally excellent idea here.
+- [ ] Allow the bot to connect to networks aside from slack. This should be pretty simple, you just need another layer and a bit more config. Commands wouldn't change, but you'd need a `type` handler for each kind of network
+- [ ] Your totally excellent idea here.
