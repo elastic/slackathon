@@ -50,23 +50,19 @@ inputBot.getUser(name).then(me => {
       clearTimeout(timeout2);
     };
 
-    try {
+    Promise.resolve(
       run(input, message, handlers).then(output => {
         const type = types[output.type];
         if (!type) throw new Error(`Unknown type returned from command: ${output.type}`);
 
-        return Promise.resolve(type().fn(output.value, message, handlers))
-          .then(done)
-          .catch(e => {
-            done();
-            postMessageToSlack(channel, e.message);
-          });
+        return type().fn(output.value, message, handlers);
+      })
+    )
+      .then(done)
+      .catch(e => {
+        done();
+        postMessageToSlack(channel, `COMMAND FAILED: \`${e.message}\``);
       });
-    } catch (e) {
-      // Command failed. Real smooth bud.
-      done();
-      postMessageToSlack(channel, e.message);
-    }
   });
 });
 
